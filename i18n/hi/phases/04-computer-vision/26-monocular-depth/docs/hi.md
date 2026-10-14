@@ -83,11 +83,13 @@ flowchart LR
 
 एक पिक्सेल उठाने के लिए `(u, v)`गहराई से`d`एक 3D बिंदु पर `(X, Y, Z)`कैमरा निर्देशांक मेंः
 
-```
-fx, fy, cx, cy = camera intrinsics
-X = (u - cx) * d / fx
-Y = (v - cy) * d / fy
-Z = d
+```math
+\begin{aligned}
+f_x, f_y, c_x, c_y &= \text{camera intrinsics} \\
+X &= (u - c_x) \cdot d / f_x \\
+Y &= (v - c_y) \cdot d / f_y \\
+Z &= d
+\end{aligned}
 ```
 
 अंतर्निहित वस्तुएं EXIF मेटाडेटा, एक माप पैटर्न, या एक मोनोकुलर अंतर्निहित अनुमानक (प्रोस्पेक्टिव फील्ड्स, यूनिडीपथ) से आती हैं। अंतर्निहित वस्तुओं के बिना, आप अभी भी 60-70 डिग्री FOV और मध्यम-रिज़ॉल्यूशन सिद्धांतों को मानकर एक बिंदु बादल को प्रस्तुत कर सकते हैं  दृश्य के लिए उपयोग करने योग्य, माप के लिए नहीं।
@@ -246,7 +248,7 @@ depth_np = np.array(out["depth"])
 | Monocular depth | "Single-image depth" | Depth estimation from one RGB frame, no stereo or LiDAR |
 | Relative depth | "Ordered depth" | Ordered z-values without real-world units |
 | Metric depth | "Absolute distance" | Depth in metres; requires calibration or a model trained with metric supervision |
-| AbsRel | "Absolute relative error" | Mean of |d_pred - d_gt| / d_gt; standard depth metric |
+| AbsRel | "Absolute relative error" | Mean of $\lvert d_{\text{pred}} - d_{\text{gt}} \rvert / d_{\text{gt}}$; standard depth metric |
 | Delta accuracy | "delta < 1.25" | Fraction of pixels with prediction within 25% of ground truth |
 | Pinhole camera | "fx, fy, cx, cy" | The camera model used to lift (u, v, d) to (X, Y, Z) |
 | DPT | "Dense Prediction Transformer" | The conv-based decoder used on top of frozen ViT encoders for depth |
