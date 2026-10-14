@@ -23,7 +23,7 @@ Les spectrogrammes de mélomène poussent plus loin. Les humains perçoivent le 
 
 **Log-magnitude.**Les magnitudes brutes sont de 5 à 6 ordres.`log(|X| + 1e-6)`ou `20 * log10(|X|)`Chaque pipeline de production utilise une grandeur de log, pas une grandeur brute.
 
-**Mel scale.**La fréquence`f`en Hz pour les cartes à mel `m`par `m = 2595 * log10(1 + f / 700)`. Le mappage est à peu près linéaire en dessous de 1 kHz et à peu près logarithmique au-dessus.
+**Mel scale.**La fréquence`f`en Hz pour les cartes à mel `m`par $m = 2595 \cdot \log_{10}(1 + f / 700)$. Le mappage est à peu près linéaire en dessous de 1 kHz et à peu près logarithmique au-dessus.
 
 **Mel filterbank.**Un ensemble de filtres triangulaires espacés de manière égale sur l'échelle mel. Chaque filtre est une somme pondérée des poubelles FFT adjacentes. Multiplication de la magnitude STFT par la matrice de la banque de filtres donne le spectrogramme mel en un matmul.
 
