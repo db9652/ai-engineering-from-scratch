@@ -43,8 +43,8 @@
 
 इनपुटों की संयुक्त वितरण लिखें `x`और लेबल `y`दो तरीकों सेः
 
-```text
-P(x, y) = P(x) * P(y | x) = P(y) * P(x | y)
+```math
+P(x, y) = P(x) \cdot P(y \mid x) = P(y) \cdot P(x \mid y)
 ```
 
 प्रत्येक प्रकार की बहाव एक अलग कारक बदलता हैः
@@ -87,8 +87,8 @@ P(x, y) = P(x) * P(y | x) = P(y) * P(x | y)
 
 PSI क्रेडिट स्कोरिंग से आता है। संदर्भ मानों को कंटेनरों में काटें, आमतौर पर संदर्भ डेसिल्स पर दस कंटेनर, ताकि प्रत्येक कंटेनर संदर्भ का 10 प्रतिशत रखता हो। प्रत्येक कंटेनर में वर्तमान मानों के हिस्से की गणना करें। फिर प्रति कंटेनर एक शब्द जोड़ेंः
 
-```text
-PSI = sum over bins of (current_share - reference_share) * ln(current_share / reference_share)
+```math
+\text{PSI} = \sum_{\text{bins}} (\text{current\_share} - \text{reference\_share}) \cdot \ln\left(\frac{\text{current\_share}}{\text{reference\_share}}\right)
 ```
 
 शून्य के हिस्से के साथ एक बिन लॉग को अनंत बनाता है, इसलिए प्रत्येक हिस्से को 0.0001 जैसे छोटे मूल्य तक क्लिप करें। PSI सममित है। यह वर्तमान से संदर्भ के लिए KL विचलन के बराबर है।
@@ -99,8 +99,8 @@ PSI = sum over bins of (current_share - reference_share) * ln(current_share / re
 
 दो नमूने के एस आंकड़े `D`दो अनुभवजन्य संचयी वितरण कार्यों के बीच सबसे बड़ा ऊर्ध्वाधर अंतर हैः
 
-```text
-D = max over x of | F_reference(x) - F_current(x) |
+```math
+D = \max_x \left\lvert F_{\text{reference}}(x) - F_{\text{current}}(x) \right\rvert
 ```
 
 `D`समान नमूनों के लिए 0 और नमुने के लिए 1 है जो ओवरलैप नहीं करते हैं। इसमें कोई डिब्बे की आवश्यकता नहीं है। p-मूल्य कोलमोगोरोव वितरण से आता है जिसमें प्रभावी नमूना आकार होता है `n * m / (n + m)`. .
@@ -111,9 +111,11 @@ D = max over x of | F_reference(x) - F_current(x) |
 
 किसी श्रेणीगत सुविधा के लिए, जैसे कि भुगतान चैनल, दो पंक्तियों (संदर्भ, वर्तमान) और प्रति श्रेणी एक स्तंभ के साथ एक तालिका बनाएं। प्रत्येक सेल में अपेक्षित संख्या पंक्ति और स्तंभ कुल से आती हैः
 
-```text
-expected[r][c] = row_total[r] * column_total[c] / grand_total
-chi2 = sum over cells of (observed - expected)^2 / expected
+```math
+\begin{aligned}
+\text{expected}[r][c] &= \text{row\_total}[r] \cdot \text{column\_total}[c] / \text{grand\_total} \\
+\text{chi2} &= \sum_{\text{cells}} (\text{observed} - \text{expected})^2 / \text{expected}
+\end{aligned}
 ```
 
 परीक्षण में है`k - 1``k`श्रेणी. एक श्रेणी जो केवल वर्तमान विंडो में दिखाई देती है एक बड़ा शब्द जोड़ती है, इसलिए परीक्षण नए मानों पर प्रतिक्रिया करता है। क्रेमर का V प्रभाव आकार है। दो पंक्तियों वाली तालिका के लिए, यह  के वर्गमूल के बराबर है`chi2 / grand_total`. .
