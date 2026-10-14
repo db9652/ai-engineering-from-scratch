@@ -43,8 +43,8 @@ El monitoreo de entradas es el tema principal de esta lección, ya que funciona 
 
 Escriba la distribución conjunta de los insumos `x`y etiquetas `y`de dos maneras:
 
-```text
-P(x, y) = P(x) * P(y | x) = P(y) * P(x | y)
+```math
+P(x, y) = P(x) \cdot P(y \mid x) = P(y) \cdot P(x \mid y)
 ```
 
 Cada tipo de deriva cambia un factor diferente:
@@ -87,8 +87,8 @@ La estacionalidad rompe ventanas ingenuas. El tráfico del lunes difiere del tr�
 
 El PSI proviene de la calificación de crédito. Cortar los valores de referencia en contenedores, generalmente diez contenedores en los déciles de referencia, de modo que cada contenedor tenga el 10 por ciento de la referencia. Cuente la proporción de valores actuales en cada contenedor. Luego suma un término por contenedor:
 
-```text
-PSI = sum over bins of (current_share - reference_share) * ln(current_share / reference_share)
+```math
+\text{PSI} = \sum_{\text{bins}} (\text{current\_share} - \text{reference\_share}) \cdot \ln\left(\frac{\text{current\_share}}{\text{reference\_share}}\right)
 ```
 
 Un bin con una cuota de cero hace que el registro sea infinito, por lo que se puede cortar cada cuota a un pequeño valor como 0.0001. PSI es simétrico. Es igual a la divergencia KL de la corriente a la referencia más la divergencia KL de la referencia a la corriente.
@@ -99,8 +99,8 @@ Los practicantes leen PSI con bandas fijas: por debajo de 0.1 es estable, 0.1 a 
 
 La estadística de KS de dos muestras `D`es la mayor brecha vertical entre las dos funciones de distribución acumulada empírica:
 
-```text
-D = max over x of | F_reference(x) - F_current(x) |
+```math
+D = \max_x \left\lvert F_{\text{reference}}(x) - F_{\text{current}}(x) \right\rvert
 ```
 
 `D`El valor p proviene de la distribución de Kolmogorov con el tamaño de muestra efectivo `n * m / (n + m)`¿ Qué ?
@@ -111,9 +111,11 @@ En las muestras grandes, el valor de p se reduce a cero para una brecha que a na
 
 Para una característica categórica, como el canal de pago, construye una tabla con dos filas (referencia, corriente) y una columna por categoría.
 
-```text
-expected[r][c] = row_total[r] * column_total[c] / grand_total
-chi2 = sum over cells of (observed - expected)^2 / expected
+```math
+\begin{aligned}
+\text{expected}[r][c] &= \text{row\_total}[r] \cdot \text{column\_total}[c] / \text{grand\_total} \\
+\text{chi2} &= \sum_{\text{cells}} (\text{observed} - \text{expected})^2 / \text{expected}
+\end{aligned}
 ```
 
 El examen tiene`k - 1`Grados de libertad para `k`Categorías. Una categoría que aparece sólo en la ventana actual agrega un término grande, por lo que la prueba reacciona a nuevos valores. V de Cramér es el tamaño del efecto. Para una tabla con dos filas, es igual a la raíz cuadrada de `chi2 / grand_total`¿ Qué ?

@@ -24,10 +24,10 @@ Los métodos de ensamblaje hacen exactamente esto. Son la técnica más confiabl
 
 ### Por qué trabajan los grupos
 
-Supongamos que usted tiene N clasificadores independientes, cada uno con precisión p > 0.5.
+Supongamos que lo tienes .$N$Los clasificadores independientes, cada uno con precisión $p > 0.5$El voto de la mayoría es correcto:
 
-```
-P(majority correct) = sum over k > N/2 of C(N,k) * p^k * (1-p)^(N-k)
+```math
+P(\text{majority correct}) = \sum_{k > N/2} \binom{N}{k} p^k (1-p)^{N-k}
 ```
 
 Para 21 clasificadores, cada uno con una precisión del 60%, la precisión de la mayoría de votos es de aproximadamente 74%. Con 101 clasificadores, aumenta a 84%.
@@ -132,7 +132,7 @@ El aumento de gradiente generaliza el aumento a funciones de pérdida arbitraria
 3. Final prediction: F_T(x)
 ```
 
-Para la pérdida cuadrada de error, los pseudo-residuos son sólo los residuos reales: `r_i = y_i - F_{t-1}(x_i)`Cada árbol se ajusta a los errores del conjunto anterior.
+Para la pérdida cuadrada de error, los pseudo-residuos son sólo los residuos reales: $r_i = y_i - F_{t-1}(x_i)$Cada árbol se ajusta a los errores del conjunto anterior.
 
 La tasa de aprendizaje (crescimiento) controla cuánto contribuye cada árbol.
 
