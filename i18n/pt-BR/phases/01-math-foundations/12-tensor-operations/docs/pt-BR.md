@@ -36,7 +36,7 @@ graph LR
     T3 --> T4["4D Tensor<br/>rank 4<br/>shape: (B,C,H,W)"]
 ```
 
-Elementos totais = produto de todos os tamanhos.`(2, 3, 4)`- É o que se passa .`2 * 3 * 4 = 24`elementos.
+Elementos totais = produto de todos os tamanhos.`(2, 3, 4)`- É o que se passa .$2 \cdot 3 \cdot 4 = 24$elementos.
 
 ### Formas de tensão no aprendizado profundo
 
@@ -232,7 +232,7 @@ batch_B = np.random.randn(4, 5, 2)
 batch_mm = np.einsum("bij,bjk->bik", batch_A, batch_B)
 ```
 
-O custo computacional de uma contracção é o produto de todos os tamanhos dos índices (conservados e somados).`bij,bjk->bik`com B=32, I=128, J=64, K=128: `32 * 128 * 64 * 128 = 33,554,432`multiplicadores adicionais.
+O custo computacional de uma contracção é o produto de todos os tamanhos dos índices (conservados e somados).`bij,bjk->bik`com$B=32$- Não .$I=128$- Não .$J=64$- Não .$K=128$- Não .$32 \cdot 128 \cdot 64 \cdot 128 = 33{,}554{,}432$multiplicadores adicionais.
 
 ### Passo 7: Mecanismo de atenção através do einsum
 
