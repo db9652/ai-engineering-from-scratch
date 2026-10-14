@@ -45,7 +45,7 @@ graph LR
 
 ### घूर्णन
 
-कोण द्वारा 2D घूर्णन से दूरी और कोण बरकरार रहते हैं। यह एक वृत्त आर्क के साथ प्रत्येक बिंदु को स्थानांतरित करता है।
+कोण द्वारा एक 2D घूर्णन $\theta$यह एक वृत्तीय आर्क के साथ प्रत्येक बिंदु को स्थानांतरित करता है।
 
 ```mermaid
 graph LR
@@ -66,18 +66,12 @@ graph LR
 
 3D में, आप एक अक्ष के चारों ओर घूमते हैं. प्रत्येक अक्ष का अपना घूर्णन मैट्रिक्स हैः
 
-```
-Rz(theta) = | cos  -sin  0 |     Rotate around z-axis
-            | sin   cos  0 |     (x-y plane spins, z stays)
-            |  0     0   1 |
-
-Rx(theta) = | 1   0     0    |   Rotate around x-axis
-            | 0  cos  -sin   |   (y-z plane spins, x stays)
-            | 0  sin   cos   |
-
-Ry(theta) = |  cos  0  sin |     Rotate around y-axis
-            |   0   1   0  |     (x-z plane spins, y stays)
-            | -sin  0  cos |
+```math
+\begin{aligned}
+R_z(\theta) &= \begin{bmatrix} \cos\theta & -\sin\theta & 0 \\ \sin\theta & \cos\theta & 0 \\ 0 & 0 & 1 \end{bmatrix} \quad \text{Rotate around z-axis (x-y plane spins, z stays)} \\[6pt]
+R_x(\theta) &= \begin{bmatrix} 1 & 0 & 0 \\ 0 & \cos\theta & -\sin\theta \\ 0 & \sin\theta & \cos\theta \end{bmatrix} \quad \text{Rotate around x-axis (y-z plane spins, x stays)} \\[6pt]
+R_y(\theta) &= \begin{bmatrix} \cos\theta & 0 & \sin\theta \\ 0 & 1 & 0 \\ -\sin\theta & 0 & \cos\theta \end{bmatrix} \quad \text{Rotate around y-axis (x-z plane spins, y stays)}
+\end{aligned}
 ```
 
 ### स्केलिंग
@@ -123,8 +117,8 @@ graph LR
 ```
 
 स्कार्फ मैट्रिक्सः
-- `Shx = [[1, k], [0, 1]]`k * y द्वारा x को शिफ्ट करता है
-- `Shy = [[1, 0], [k, 1]]`k * x द्वारा y को शिफ्ट करता है
+- `Shx = [[1, k], [0, 1]]`शिफ्ट$x$द्वारा $k \cdot y$
+- `Shy = [[1, 0], [k, 1]]`शिफ्ट$y$द्वारा $k \cdot x$
 
 ### चिंतन
 
@@ -196,7 +190,7 @@ Eigenvector [1, -1] with eigenvalue 1:
 
 ### स्वयं संरचना
 
-यदि किसी मैट्रिक्स में n रैखिक रूप से स्वतंत्र स्ववेक्टर हैं, तो इसे विघटित किया जा सकता हैः
+यदि एक मैट्रिक्स में है $n$रैखिक रूप से स्वतंत्र स्व-वेक्टर, यह विघटित किया जा सकता हैः
 
 ```
 A = V @ D @ V^(-1)
@@ -210,7 +204,7 @@ This says: rotate into eigenvector coordinates, scale along each axis, rotate ba
 
 ### स्व-मूल्य क्यों मायने रखते हैं
 
-**PCA.**सह-परिवर्तन मैट्रिक्स के स्वयं वेक्टर मुख्य घटक हैं। स्वयं मूल्य आपको बताते हैं कि प्रत्येक घटक कितना भिन्नता कैप्चर करता है। स्वयं मूल्य द्वारा क्रमबद्ध करें, शीर्ष k को बनाए रखें, और आपके पास आयामता में कमी है।
+**PCA.**सह-परिवर्तन मैट्रिक्स के स्वयं वेक्टर मुख्य घटक हैं। स्वयं मूल्य आपको बताते हैं कि प्रत्येक घटक कितना भिन्नता कैप्चर करता है। स्वयं मूल्य के अनुसार क्रमबद्ध करें, शीर्ष रखें $k$, और आप आयामता में कमी है.
 
 **Stability.**पुनरावर्ती नेटवर्क और गतिशील प्रणालियों में, परिमाण > 1 के साथ स्वमान आउटपुट को विस्फोट करने का कारण बनते हैं। परिमाण < 1 उन्हें गायब होने का कारण बनता है। यह एक वाक्य में वर्णित गायब होने / विस्फोट ग्रेडिएंट समस्या है।
 
@@ -309,7 +303,7 @@ print(f"Same? {result1 == result2}")
 
 ### चरण 3: स्क्रैच से स्व-मूल्य (2x2)
 
-एक 2x2 मैट्रिक्स के लिए `[[a, b], [c, d]]`, स्वमूल्य विशेषता समीकरण को हल करते हैंः `lambda^2 - (a+d)*lambda + (ad - bc) = 0`. .
+एक 2x2 मैट्रिक्स के लिए `[[a, b], [c, d]]`, स्वमूल्य विशेषता समीकरण को हल करते हैंः $\lambda^2 - (a+d)\lambda + (ad - bc) = 0$. .
 
 ```python
 def eigenvalues_2x2(matrix):
@@ -454,9 +448,9 @@ print(f"Rotate 90 around x: {np.round(rotated_x, 4)}")
 | Composition | "Do two things" | Multiplying transformation matrices to chain operations. Order matters: B @ A means apply A first, then B. |
 | Eigenvector | "Special direction" | A direction that the matrix only scales, never rotates. The transformation's fingerprint. |
 | Eigenvalue | "How much it stretches" | The scalar factor by which the matrix scales its eigenvector. Can be negative (flip) or complex (rotation). |
-| Eigendecomposition | "Break the matrix apart" | Writing a matrix as V @ D @ V^(-1), separating it into its fundamental scaling directions and magnitudes. |
+| Eigendecomposition | "Break the matrix apart" | Writing a matrix as $V D V^{-1}$, separating it into its fundamental scaling directions and magnitudes. |
 | Determinant | "A single number from a matrix" | The factor by which the transformation scales area (2D) or volume (3D). Zero means the transformation is irreversible. |
-| Characteristic equation | "Where eigenvalues come from" | det(A - lambda * I) = 0. The polynomial whose roots are the eigenvalues. |
+| Characteristic equation | "Where eigenvalues come from" | $\det(A - \lambda I) = 0$. The polynomial whose roots are the eigenvalues. |
 
 ## आगे पढ़ना
 

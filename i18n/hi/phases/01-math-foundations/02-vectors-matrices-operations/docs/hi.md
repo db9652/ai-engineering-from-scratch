@@ -43,11 +43,10 @@ w = [1, 0, -2]    -- a 3D vector
 
 ### मैट्रिक्सः संख्याओं के ग्रिड
 
-एक मैट्रिक्स एक 2D ग्रिड है। पंक्तियों और स्तंभों। एक m x n मैट्रिक्स में m पंक्तियों और n स्तंभ हैं।
+एक मैट्रिक्स एक 2D ग्रिड है। पंक्तियों और स्तंभों। एक$m \times n$मैट्रिक्स में है $m$पंक्तियाँ और $n$स्तंभ।
 
-```
-A = | 1  2  3 |     -- 2x3 matrix (2 rows, 3 columns)
-    | 4  5  6 |
+```math
+A = \begin{bmatrix} 1 & 2 & 3 \\ 4 & 5 & 6 \end{bmatrix} \quad \text{2x3 matrix (2 rows, 3 columns)}
 ```
 
 न्यूरल नेटवर्क में, वजन मैट्रिक्स इनपुट वेक्टरों को आउटपुट वेक्टरों में बदल देते हैं। 784 इनपुट और 128 आउटपुट वाली परत में 128x784 वजन मैट्रिक्स का उपयोग किया जाता है।
@@ -83,16 +82,14 @@ Inner dimensions: 784 = 784  -- valid
 
 तत्व-बुद्धिमानः मिलान वाली स्थिति को गुणा करें. दोनों मैट्रिक्स एक ही आकार के होने चाहिए।
 
-```
-| 1  2 |   | 5  6 |   | 5  12 |
-| 3  4 | * | 7  8 | = | 21 32 |
+```math
+\begin{bmatrix} 1 & 2 \\ 3 & 4 \end{bmatrix} * \begin{bmatrix} 5 & 6 \\ 7 & 8 \end{bmatrix} = \begin{bmatrix} 5 & 12 \\ 21 & 32 \end{bmatrix}
 ```
 
 मैट्रिक्स गुणाः पंक्तियों और स्तंभों के अंक उत्पाद। आंतरिक आयामों को मेल खाना चाहिए।
 
-```
-| 1  2 |   | 5  6 |   | 1*5+2*7  1*6+2*8 |   | 19  22 |
-| 3  4 | @ | 7  8 | = | 3*5+4*7  3*6+4*8 | = | 43  50 |
+```math
+\begin{bmatrix} 1 & 2 \\ 3 & 4 \end{bmatrix} @ \begin{bmatrix} 5 & 6 \\ 7 & 8 \end{bmatrix} = \begin{bmatrix} 1 \cdot 5 + 2 \cdot 7 & 1 \cdot 6 + 2 \cdot 8 \\ 3 \cdot 5 + 4 \cdot 7 & 3 \cdot 6 + 4 \cdot 8 \end{bmatrix} = \begin{bmatrix} 19 & 22 \\ 43 & 50 \end{bmatrix}
 ```
 
 अलग-अलग ऑपरेशन, अलग-अलग परिणाम, अलग-अलग नियम।
@@ -332,7 +329,7 @@ NumPy स्वचालित रूप से दोनों पंक्त�
 | Vector | "An arrow" | An ordered list of numbers. In AI: a point in high-dimensional space. |
 | Matrix | "A table of numbers" | A linear transformation. It maps vectors from one space to another. |
 | Matrix multiply | "Just multiply the numbers" | Dot products between every row of the first matrix and every column of the second. Order matters. |
-| Transpose | "Flip it" | Swap rows and columns. Turns an m x n matrix into n x m. Critical in backpropagation. |
+| Transpose | "Flip it" | Swap rows and columns. Turns an $m \times n$ matrix into $n \times m$. Critical in backpropagation. |
 | Determinant | "Some number from the matrix" | Measures how much the matrix scales area (2D) or volume (3D). Zero means the transformation crushes a dimension. |
 | Inverse | "Undo the matrix" | The matrix that reverses the transformation. Only exists when the determinant is not zero. |
 | Identity matrix | "The boring matrix" | The matrix equivalent of multiplying by 1. Used in residual connections (ResNets). |
