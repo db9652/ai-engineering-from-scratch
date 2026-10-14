@@ -42,11 +42,11 @@ INT8:  [1 sign] [7 value]                   = 8  bits (uniform steps)
 INT4:  [1 sign] [3 value]                   = 4  bits (16 levels total)
 ```
 
-**FP32**El entrenamiento se realizó exclusivamente en FP32. Todavía se aplica para la acumulación (sumas corrientes durante la multiplicación de matrices).
+**FP32**23 bits de mantissa le dan aproximadamente 7 dígitos decimales de precisión.$1.2 \times 10^{-38}$¿ Qué ?$3.4 \times 10^{38}$El entrenamiento se realizó exclusivamente en el PQ32.
 
 **FP16**El exponente se reduce a 5 bits, reduciendo el rango dramáticamente (valor máximo ~65,504). Esto es bueno para pesas (que se agrupan cerca de cero) pero peligroso para las activaciones y gradientes que pueden aumentar durante el entrenamiento.
 
-**BF16**(Brain Float 16) mantiene el exponente de 8 bits de FP32 pero reduce la mantissa a 7 bits. El mismo rango que el FP32, menos precisión que el FP16. Google lo diseñó específicamente para el aprendizaje profundo. La intuición: el rango es más importante que la precisión para las redes neuronales. Un gradiente de 10^-20 que se subfluye a cero en FP16 sobrevive en BF16. Un peso de 0.07342 que ronda a 0.0734 en BF16 es lo suficientemente cerca. Cada carrera de entrenamiento moderna utiliza BF16 o una mezcla de BF16/FP32.
+**BF16**(Brain Float 16) mantiene el exponente de 8 bits de FP32 pero reduce la mantissa a 7 bits.$10^{-20}$El peso de 0,07342 que ronda a 0,0734 en BF16 es lo suficientemente cercano.
 
 **FP8**Se utiliza para pesas y activaciones durante la inferencia. Se utiliza E5M2 (5 exponente, 2 mantissa) para gradientes durante el entrenamiento donde el rango importa más que la precisión. La inferencia FP8 en las GPU H100 logra una velocidad del 30-50% con una pérdida de calidad insignificante.
 
