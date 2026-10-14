@@ -43,8 +43,8 @@ La surveillance des entrées est le sujet principal de cette leçon, car elle fo
 
 Écrire la répartition commune des entrées `x`et les étiquettes `y`de deux façons:
 
-```text
-P(x, y) = P(x) * P(y | x) = P(y) * P(x | y)
+```math
+P(x, y) = P(x) \cdot P(y \mid x) = P(y) \cdot P(x \mid y)
 ```
 
 Chaque type de dérive change un facteur différent:
@@ -87,8 +87,8 @@ La saisonnalité brise les fenêtres naïves. Le trafic du lundi diffère du tra
 
 Le PSI provient du score de crédit. Coupez les valeurs de référence en poubelles, généralement dix poubelles aux décibels de référence, de sorte que chaque poubelle contient 10% de la référence.
 
-```text
-PSI = sum over bins of (current_share - reference_share) * ln(current_share / reference_share)
+```math
+\text{PSI} = \sum_{\text{bins}} (\text{current\_share} - \text{reference\_share}) \cdot \ln\left(\frac{\text{current\_share}}{\text{reference\_share}}\right)
 ```
 
 Un bin avec une part de zéro rend le journal infini, donc cliquez chaque part à une petite valeur telle que 0,0001. PSI est symétrique.
@@ -99,8 +99,8 @@ Les praticiens lisent le PSI avec des bandes fixes: en dessous de 0,1 est stable
 
 Les statistiques KS à deux échantillons `D`est l'écart vertical le plus important entre les deux fonctions de distribution cumulative empirique:
 
-```text
-D = max over x of | F_reference(x) - F_current(x) |
+```math
+D = \max_x \left\lvert F_{\text{reference}}(x) - F_{\text{current}}(x) \right\rvert
 ```
 
 `D`est 0 pour les échantillons identiques et 1 pour les échantillons qui ne se chevauchent pas. Il n'a pas besoin de poubelles. La valeur p provient de la distribution de Kolmogorov avec la taille effective de l'échantillon `n * m / (n + m)`- Je suis désolé .
@@ -111,9 +111,11 @@ Avec de grands échantillons, la valeur de p va à zéro pour une lacune qui ne 
 
 Pour une fonctionnalité catégorique, telle que le canal de paiement, construisez un tableau avec deux lignes (références, courants) et une colonne par catégorie.
 
-```text
-expected[r][c] = row_total[r] * column_total[c] / grand_total
-chi2 = sum over cells of (observed - expected)^2 / expected
+```math
+\begin{aligned}
+\text{expected}[r][c] &= \text{row\_total}[r] \cdot \text{column\_total}[c] / \text{grand\_total} \\
+\text{chi2} &= \sum_{\text{cells}} (\text{observed} - \text{expected})^2 / \text{expected}
+\end{aligned}
 ```
 
 Le test a`k - 1`degrés de liberté pour `k`catégories. Une catégorie qui apparaît uniquement dans la fenêtre actuelle ajoute un terme grand, de sorte que le test réagit à de nouvelles valeurs. V de Cramér est la taille de l'effet. Pour une table avec deux lignes, il est égal à la racine carrée de `chi2 / grand_total`- Je suis désolé .

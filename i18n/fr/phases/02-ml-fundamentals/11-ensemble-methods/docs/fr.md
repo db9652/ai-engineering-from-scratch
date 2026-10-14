@@ -24,10 +24,10 @@ Les méthodes d'assemblage font exactement cela. Ce sont les techniques les plus
 
 ### Pourquoi les groupes travaillent
 
-Supposons que vous ayez N classifiateurs indépendants, chacun avec une précision p > 0,5.
+Supposons que vous ayez$N$des classifiateurs indépendants, chacun avec précision $p > 0.5$- La majorité des voix est exacte:
 
-```
-P(majority correct) = sum over k > N/2 of C(N,k) * p^k * (1-p)^(N-k)
+```math
+P(\text{majority correct}) = \sum_{k > N/2} \binom{N}{k} p^k (1-p)^{N-k}
 ```
 
 Pour 21 classifiateurs, chacun avec une précision de 60%, la précision des voix majoritaires est d'environ 74%. Avec 101 classifiateurs, elle monte à 84%.
@@ -132,7 +132,7 @@ Le boosting gradient généralise le boosting à des fonctions de perte arbitrai
 3. Final prediction: F_T(x)
 ```
 
-Pour la perte d'erreur carrée, les pseudo-résidus sont juste les résidus réels: `r_i = y_i - F_{t-1}(x_i)`Chaque arbre correspond littéralement aux erreurs de l'ensemble précédent.
+Pour la perte d'erreur carrée, les pseudo-résidus sont juste les résidus réels: $r_i = y_i - F_{t-1}(x_i)$Chaque arbre correspond littéralement aux erreurs de l'ensemble précédent.
 
 Le taux d'apprentissage (rétrécissement) contrôle la contribution de chaque arbre.
 
