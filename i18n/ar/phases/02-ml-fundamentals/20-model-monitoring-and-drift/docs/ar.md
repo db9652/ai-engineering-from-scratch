@@ -43,8 +43,8 @@
 
 اكتب التوزيع المشترك للمدخلات`x`و العلامات`y`بطرق اثنتين:
 
-```text
-P(x, y) = P(x) * P(y | x) = P(y) * P(x | y)
+```math
+P(x, y) = P(x) \cdot P(y \mid x) = P(y) \cdot P(x \mid y)
 ```
 
 كل نوع من التجرف يغير عامل مختلف:
@@ -87,8 +87,8 @@ P(x, y) = P(x) * P(y | x) = P(y) * P(x | y)
 
 يُعتبر أنّه من المُقدّر أنّه يُحَصّل على 10٪ من المُقدّر. وذلك من خلال إحصاء القيم الحاليّة في كلّ قِطَع. ثمّ قم بتجميع عبارة واحدة لكلّ قِطع:
 
-```text
-PSI = sum over bins of (current_share - reference_share) * ln(current_share / reference_share)
+```math
+\text{PSI} = \sum_{\text{bins}} (\text{current\_share} - \text{reference\_share}) \cdot \ln\left(\frac{\text{current\_share}}{\text{reference\_share}}\right)
 ```
 
 إن القمامة ذات حصة من الصفر تجعل السجل لا نهائي، لذلك قم بتقطيع كل حصة إلى قيمة صغيرة مثل 0.0001. PSI متماثلة. إنها تساوي تباين KL من التيار إلى المرجع بالإضافة إلى تباين KL من المرجع إلى التيار.
@@ -99,8 +99,8 @@ PSI = sum over bins of (current_share - reference_share) * ln(current_share / re
 
 إحصاءات KS من عينتين `D`هو أكبر فجوة عمودية بين وظائف التوزيع التراكمية التجريبية:
 
-```text
-D = max over x of | F_reference(x) - F_current(x) |
+```math
+D = \max_x \left\lvert F_{\text{reference}}(x) - F_{\text{current}}(x) \right\rvert
 ```
 
 `D`هو 0 بالنسبة للعينات المتماثلة و 1 بالنسبة للعينات التي لا تتداخل. لا تحتاج إلى حاويات. القيمة p تأتي من توزيع كولموجوروف مع حجم العينة الفعلي `n * m / (n + m)`. . .
@@ -111,9 +111,11 @@ D = max over x of | F_reference(x) - F_current(x) |
 
 لصفف فصلي، مثل قناة الدفع، قم ببناء جدول يضم صفين (المرجعية، الحالية) وعمدة واحدة لكل فئة.
 
-```text
-expected[r][c] = row_total[r] * column_total[c] / grand_total
-chi2 = sum over cells of (observed - expected)^2 / expected
+```math
+\begin{aligned}
+\text{expected}[r][c] &= \text{row\_total}[r] \cdot \text{column\_total}[c] / \text{grand\_total} \\
+\text{chi2} &= \sum_{\text{cells}} (\text{observed} - \text{expected})^2 / \text{expected}
+\end{aligned}
 ```
 
 الاختبار لديه`k - 1`درجات الحرية لـ`k`فئة. فئة التي تظهر فقط في النافذة الحالية تضيف مصطلح كبير، لذلك يستجيب الاختبار إلى قيم جديدة. V من كرامير هو حجم التأثير. بالنسبة إلى جدول مع صفين، هو يساوي الجذر التربيعي من `chi2 / grand_total`. . .
