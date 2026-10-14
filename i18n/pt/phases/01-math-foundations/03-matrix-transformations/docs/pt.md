@@ -45,7 +45,7 @@ graph LR
 
 ### Rotatividade
 
-Uma rotação 2D por ângulo theta mantém as distâncias e ângulos intactos.
+Uma rotação 2D por ângulo $\theta$Mantém as distâncias e os ângulos intactos, e move todos os pontos ao longo de um arco circular.
 
 ```mermaid
 graph LR
@@ -66,18 +66,12 @@ graph LR
 
 Em 3D, você gira em torno de um eixo.
 
-```
-Rz(theta) = | cos  -sin  0 |     Rotate around z-axis
-            | sin   cos  0 |     (x-y plane spins, z stays)
-            |  0     0   1 |
-
-Rx(theta) = | 1   0     0    |   Rotate around x-axis
-            | 0  cos  -sin   |   (y-z plane spins, x stays)
-            | 0  sin   cos   |
-
-Ry(theta) = |  cos  0  sin |     Rotate around y-axis
-            |   0   1   0  |     (x-z plane spins, y stays)
-            | -sin  0  cos |
+```math
+\begin{aligned}
+R_z(\theta) &= \begin{bmatrix} \cos\theta & -\sin\theta & 0 \\ \sin\theta & \cos\theta & 0 \\ 0 & 0 & 1 \end{bmatrix} \quad \text{Rotate around z-axis (x-y plane spins, z stays)} \\[6pt]
+R_x(\theta) &= \begin{bmatrix} 1 & 0 & 0 \\ 0 & \cos\theta & -\sin\theta \\ 0 & \sin\theta & \cos\theta \end{bmatrix} \quad \text{Rotate around x-axis (y-z plane spins, x stays)} \\[6pt]
+R_y(\theta) &= \begin{bmatrix} \cos\theta & 0 & \sin\theta \\ 0 & 1 & 0 \\ -\sin\theta & 0 & \cos\theta \end{bmatrix} \quad \text{Rotate around y-axis (x-z plane spins, y stays)}
+\end{aligned}
 ```
 
 ### Escalada
@@ -123,8 +117,8 @@ graph LR
 ```
 
 Matrizes de corte:
-- `Shx = [[1, k], [0, 1]]`mudanças x por k * y
-- `Shy = [[1, 0], [k, 1]]`mudanças de y por k * x
+- `Shx = [[1, k], [0, 1]]`turnos$x$Por$k \cdot y$
+- `Shy = [[1, 0], [k, 1]]`turnos$y$Por$k \cdot x$
 
 ### Reflexão
 
@@ -196,7 +190,7 @@ A matriz estende o espaço por 3x ao longo de [1, 1] e mantém [1, -1] inalterad
 
 ### Composição própria
 
-Se uma matriz tiver n vetores próprios linearmente independentes, ela pode ser decomposta:
+Se uma matriz tiver$n$Vêctores próprios linearmente independentes, podem ser decomposidos:
 
 ```
 A = V @ D @ V^(-1)
@@ -210,7 +204,7 @@ This says: rotate into eigenvector coordinates, scale along each axis, rotate ba
 
 ### Por que os valores próprios importam
 
-**PCA.**Os vetores próprios da matriz de covariância são os componentes principais. Os valores próprios dizem-lhe quanta variância cada componente capta.
+**PCA.**Os vetores próprios da matriz de covariância são os componentes principais. Os valores próprios dizem-lhe quanta variância cada componente capta.$k$, e temos dimensional redução.
 
 **Stability.**Em redes recorrentes e sistemas dinâmicos, os valores próprios com magnitude > 1 causam explosões de saídas.
 
@@ -309,7 +303,7 @@ print(f"Same? {result1 == result2}")
 
 ### Passo 3: Valores próprios a partir do zero (2x2)
 
-Para uma matriz 2x2 `[[a, b], [c, d]]`, os valores próprios resolvem a equação característica: `lambda^2 - (a+d)*lambda + (ad - bc) = 0`- Não .
+Para uma matriz 2x2 `[[a, b], [c, d]]`, os valores próprios resolvem a equação característica: $\lambda^2 - (a+d)\lambda + (ad - bc) = 0$- Não .
 
 ```python
 def eigenvalues_2x2(matrix):
@@ -454,9 +448,9 @@ Esta lição constrói a base geométrica para PCA (Fase 2) e análise de peso d
 | Composition | "Do two things" | Multiplying transformation matrices to chain operations. Order matters: B @ A means apply A first, then B. |
 | Eigenvector | "Special direction" | A direction that the matrix only scales, never rotates. The transformation's fingerprint. |
 | Eigenvalue | "How much it stretches" | The scalar factor by which the matrix scales its eigenvector. Can be negative (flip) or complex (rotation). |
-| Eigendecomposition | "Break the matrix apart" | Writing a matrix as V @ D @ V^(-1), separating it into its fundamental scaling directions and magnitudes. |
+| Eigendecomposition | "Break the matrix apart" | Writing a matrix as $V D V^{-1}$, separating it into its fundamental scaling directions and magnitudes. |
 | Determinant | "A single number from a matrix" | The factor by which the transformation scales area (2D) or volume (3D). Zero means the transformation is irreversible. |
-| Characteristic equation | "Where eigenvalues come from" | det(A - lambda * I) = 0. The polynomial whose roots are the eigenvalues. |
+| Characteristic equation | "Where eigenvalues come from" | $\det(A - \lambda I) = 0$. The polynomial whose roots are the eigenvalues. |
 
 ## Mais leitura
 

@@ -32,7 +32,7 @@ Um vetor é apenas uma lista de números. Mas esses números significam algo - s
 |---|---|-------|
 | 3 | 2 | The vector points from origin (0,0) to (3, 2) on the plane |
 
-O vetor tem magnitude sqrt ((3^2 + 2^2) = sqrt ((13) e aponta para cima e para a direita.
+O vetor tem magnitude .$\sqrt{3^2 + 2^2} = \sqrt{13}$e aponta para cima e para a direita.
 
 Na IA, vetores representam tudo:
 - Uma palavra → um vetor de 768 números (seu "significado" em espaço de inserção)
@@ -71,19 +71,20 @@ Na IA, as matrizes são o modelo:
 
 O produto de pontos de dois vetores diz-lhe o quão semelhantes são.
 
-```
-a · b = a₁×b₁ + a₂×b₂ + ... + aₙ×bₙ
-
-Same direction:      a · b > 0  (similar)
-Perpendicular:       a · b = 0  (unrelated)
-Opposite direction:  a · b < 0  (dissimilar)
+```math
+\begin{aligned}
+a \cdot b &= a_1 \times b_1 + a_2 \times b_2 + \cdots + a_n \times b_n \\[4pt]
+\text{Same direction:} \quad a \cdot b &> 0 \quad \text{(similar)} \\
+\text{Perpendicular:} \quad a \cdot b &= 0 \quad \text{(unrelated)} \\
+\text{Opposite direction:} \quad a \cdot b &< 0 \quad \text{(dissimilar)}
+\end{aligned}
 ```
 
 É literalmente assim que os motores de busca, os sistemas de recomendação e o RAG funcionam: encontram vetores com produtos de pontos altos.
 
 ### Independência Linear
 
-Os vetores são linearmente independentes se nenhum vetor no conjunto pode ser escrito como uma combinação dos outros. Se v1, v2, v3 são independentes, eles abrangem um espaço 3D. Se um é uma combinação dos outros, eles apenas abrangem um plano.
+Os vetores são linearmente independentes se nenhum vetor no conjunto pode ser escrito como uma combinação dos outros.$v_1, v_2, v_3$Se um é uma combinação dos outros, eles apenas abrangem um plano.
 
 Por que é importante para a IA: a matriz de características deve ter colunas linearmente independentes. Se duas características estão perfeitamente correlacionadas (linearmente dependentes), o modelo não pode distinguir os seus efeitos. Isso causa multicolinariedade na regressão - a matriz de peso se torna instável, e pequenas mudanças de entrada produz oscilações selvagens de saída.
 
@@ -95,7 +96,7 @@ v2 = [0, 1, 0]
 v3 = [2, 1, 0]   # v3 = 2*v1 + v2
 ```
 
-V1 e v2 são independentes - nem é um múltiplo escalar ou combinação do outro. Mas v3 = 2 * v1 + v2, então {v1, v2, v3} é um conjunto dependente. Estes três vetores estão todos no plano xy. Não importa como você os combina, você não pode chegar a [0, 0, 1]. Você tem três vetores, mas apenas duas dimensões de liberdade.
+$v_1$E ...$v_2$Não é um múltiplo escalar ou uma combinação do outro.$v_3 = 2 v_1 + v_2$- Então ...$\lbrace v_1, v_2, v_3 \rbrace$é um conjunto dependente. Estes três vetores estão todos no plano xy. Não importa como você os combina, você não pode chegar a [0, 0, 1]. Você tem três vetores, mas apenas duas dimensões de liberdade.
 
 Em um conjunto de dados: se feature_3 = 2*feature_1 + feature_2, adicionar feature_3 dá ao modelo zero novas informações. Pior, torna as equações normais singulares - não há solução única para os pesos.
 
@@ -105,15 +106,15 @@ Uma base é um conjunto mínimo de vetores linearmente independentes que abrange
 
 A base padrão para o espaço 3D é {[1,0,0], [0,1,0], [0,0,1]}. Mas quaisquer três vetores independentes em 3D formam uma base válida.
 
-Rango de uma matriz = número de colunas linearmente independentes = número de linhas linearmente independentes. Se rank < min(linhas, cols), a matriz é deficiente em rank.
+Rango de uma matriz = número de colunas linearmente independentes = número de linhas linearmente independentes.$\text{rank} < \min(\text{rows}, \text{cols})$, a matriz é deficiente em grau.
 - O sistema tem infinitamente muitas soluções (ou nenhuma)
 - Informações perdidas na transformação
 - A matriz não pode ser invertida
 
 | Situation | Rank | What it means for ML |
 |-----------|------|---------------------|
-| Full rank (rank = min(m, n)) | Maximum possible | Unique least-squares solution exists. Model is well-conditioned. |
-| Rank deficient (rank < min(m, n)) | Below maximum | Features are redundant. Infinitely many weight solutions. Regularization needed. |
+| Full rank $(\text{rank} = \min(m, n))$ | Maximum possible | Unique least-squares solution exists. Model is well-conditioned. |
+| Rank deficient $(\text{rank} < \min(m, n))$ | Below maximum | Features are redundant. Infinitely many weight solutions. Regularization needed. |
 | Rank 1 | 1 | Every column is a scaled copy of one vector. All data lies on a line. |
 | Near rank-deficient (small singular values) | Numerically low | Matrix is ill-conditioned. Tiny input noise causes large output changes. Use SVD truncation or ridge regression. |
 
@@ -121,11 +122,11 @@ Rango de uma matriz = número de colunas linearmente independentes = número de 
 
 Vêctor de projecção **a**sobre o vetor **b**dá a componente de **a**na direcção de **b**- Não .
 
-```
-proj_b(a) = (a dot b / b dot b) * b
+```math
+\operatorname{proj}_b(a) = \frac{a \cdot b}{b \cdot b} \, b
 ```
 
-O residual (a - proj_b(a)) é perpendicular a b. Esta decomposição ortogonal é a base do ajuste de mínimos quadrados.
+O resíduo$(a - \operatorname{proj}_b(a))$é perpendicular a $b$Esta decomposição ortogonal é a base do ajuste de mínimos quadrados.
 
 A projecção está em todo o ML:
 - Regressão linear minimiza a distância das observações para o espaço coluna - a solução é uma projeção
@@ -143,9 +144,9 @@ graph LR
     end
 ```
 
-**Example:**A) A posição de referência do produto
+**Example:** $a = [3, 4]$- Não .$b = [1, 0]$
 
-Proj_b(a) = (3*1 + 4*0) / (1*1 + 0*0) * [1, 0] = 3 * [1, 0] = [3, 0]
+$\operatorname{proj}_b(a) = (3 \cdot 1 + 4 \cdot 0) / (1 \cdot 1 + 0 \cdot 0) \cdot [1, 0] = 3 \cdot [1, 0] = [3, 0]$
 
 A projeção deixa cair o componente y. Isto é a redução de dimensionalidade na sua forma mais simples - jogar fora as direções que não nos importam.
 
