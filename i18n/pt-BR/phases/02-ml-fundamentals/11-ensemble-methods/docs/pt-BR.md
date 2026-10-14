@@ -24,10 +24,10 @@ Os métodos de montagem fazem exatamente isso. Eles são a técnica mais confiá
 
 ### Por que os grupos trabalham
 
-Suponha que tenha N classificadores independentes, cada um com precisão p > 0,5.
+Suponha que tenha .$N$Classificadores independentes, cada um com precisão $p > 0.5$A maioria dos votos é correta:
 
-```
-P(majority correct) = sum over k > N/2 of C(N,k) * p^k * (1-p)^(N-k)
+```math
+P(\text{majority correct}) = \sum_{k > N/2} \binom{N}{k} p^k (1-p)^{N-k}
 ```
 
 Para 21 classificadores, cada um com 60% de precisão, a precisão da maioria dos votos é de cerca de 74%. Com 101 classificadores, ele sobe para 84%. Os erros são cancelados quando os modelos cometem erros diferentes.
@@ -132,7 +132,7 @@ O aumento do gradiente generaliza o aumento para funções de perda arbitrárias
 3. Final prediction: F_T(x)
 ```
 
-Para perda de erro quadrado, os pseudo-resíduos são apenas os resíduos reais: `r_i = y_i - F_{t-1}(x_i)`Cada árvore corresponde literalmente aos erros do conjunto anterior.
+Para perda de erro quadrado, os pseudo-resíduos são apenas os resíduos reais: $r_i = y_i - F_{t-1}(x_i)$Cada árvore corresponde literalmente aos erros do conjunto anterior.
 
 A taxa de aprendizagem (reduzimento) controla o quanto cada árvore contribui.
 
