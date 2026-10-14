@@ -43,11 +43,10 @@ w = [1, 0, -2]    -- a 3D vector
 
 ### 矩阵:数字网
 
-矩阵是一个二维格格. 列和列.一个m x n矩阵有m列和n列.
+矩阵是一个二维格,行列和列.$m \times n$矩阵有$m$排列和$n$列表
 
-```
-A = | 1  2  3 |     -- 2x3 matrix (2 rows, 3 columns)
-    | 4  5  6 |
+```math
+A = \begin{bmatrix} 1 & 2 & 3 \\ 4 & 5 & 6 \end{bmatrix} \quad \text{2x3 matrix (2 rows, 3 columns)}
 ```
 
 在神经网络中,重量矩阵将输入向量转化为输出向量.一个有784个输入和128个输出的层使用 128x784的重量矩阵.
@@ -83,16 +82,14 @@ Inner dimensions: 784 = 784  -- valid
 
 按元素的角度,乘以相匹配的位置.
 
-```
-| 1  2 |   | 5  6 |   | 5  12 |
-| 3  4 | * | 7  8 | = | 21 32 |
+```math
+\begin{bmatrix} 1 & 2 \\ 3 & 4 \end{bmatrix} * \begin{bmatrix} 5 & 6 \\ 7 & 8 \end{bmatrix} = \begin{bmatrix} 5 & 12 \\ 21 & 32 \end{bmatrix}
 ```
 
 矩阵乘法:列和列的点产量.内面尺寸必须匹配.
 
-```
-| 1  2 |   | 5  6 |   | 1*5+2*7  1*6+2*8 |   | 19  22 |
-| 3  4 | @ | 7  8 | = | 3*5+4*7  3*6+4*8 | = | 43  50 |
+```math
+\begin{bmatrix} 1 & 2 \\ 3 & 4 \end{bmatrix} @ \begin{bmatrix} 5 & 6 \\ 7 & 8 \end{bmatrix} = \begin{bmatrix} 1 \cdot 5 + 2 \cdot 7 & 1 \cdot 6 + 2 \cdot 8 \\ 3 \cdot 5 + 4 \cdot 7 & 3 \cdot 6 + 4 \cdot 8 \end{bmatrix} = \begin{bmatrix} 19 & 22 \\ 43 & 50 \end{bmatrix}
 ```
 
 不同的操作,不同的结果,不同的规则.
@@ -332,7 +329,7 @@ print(matrix + bias)
 | Vector | "An arrow" | An ordered list of numbers. In AI: a point in high-dimensional space. |
 | Matrix | "A table of numbers" | A linear transformation. It maps vectors from one space to another. |
 | Matrix multiply | "Just multiply the numbers" | Dot products between every row of the first matrix and every column of the second. Order matters. |
-| Transpose | "Flip it" | Swap rows and columns. Turns an m x n matrix into n x m. Critical in backpropagation. |
+| Transpose | "Flip it" | Swap rows and columns. Turns an $m \times n$ matrix into $n \times m$. Critical in backpropagation. |
 | Determinant | "Some number from the matrix" | Measures how much the matrix scales area (2D) or volume (3D). Zero means the transformation crushes a dimension. |
 | Inverse | "Undo the matrix" | The matrix that reverses the transformation. Only exists when the determinant is not zero. |
 | Identity matrix | "The boring matrix" | The matrix equivalent of multiplying by 1. Used in residual connections (ResNets). |
