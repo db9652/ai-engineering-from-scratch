@@ -23,7 +23,7 @@ Os espectrogramas mel empurram mais longe. Os seres humanos percebem o pitch log
 
 **Log-magnitude.**Grandes dimensões cruas variam entre 5 e 6 ordens de magnitude.`log(|X| + 1e-6)`ou `20 * log10(|X|)`Cada linha de produção usa magnitude de log, não magnitude bruta.
 
-**Mel scale.**Frequência`f`em mapas Hz para mel `m`Por`m = 2595 * log10(1 + f / 700)`O mapeamento é aproximadamente linear abaixo de 1 kHz e aproximadamente logarítmico acima. 80 melbins cobrindo 08 kHz é a entrada ASR padrão.
+**Mel scale.**Frequência`f`em mapas Hz para mel `m`Por$m = 2595 \cdot \log_{10}(1 + f / 700)$O mapeamento é aproximadamente linear abaixo de 1 kHz e aproximadamente logarítmico acima. 80 melbins cobrindo 08 kHz é a entrada ASR padrão.
 
 **Mel filterbank.**Um conjunto de filtros triangulares espaçados igualmente na escala mel. Cada filtro é uma soma ponderada de contenedores FFT adjacentes. Multiplicando a magnitude STFT pela matriz filterbank dá o espectrograma mel em um matmul.
 
