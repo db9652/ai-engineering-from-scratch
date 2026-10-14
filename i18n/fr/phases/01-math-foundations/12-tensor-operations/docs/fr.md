@@ -36,7 +36,7 @@ graph LR
     T3 --> T4["4D Tensor<br/>rank 4<br/>shape: (B,C,H,W)"]
 ```
 
-Le nombre total d'éléments = produit de toutes tailles.`(2, 3, 4)`Il tient`2 * 3 * 4 = 24`Les éléments.
+Le nombre total d'éléments = produit de toutes tailles.`(2, 3, 4)`Il tient$2 \cdot 3 \cdot 4 = 24$Les éléments.
 
 ### Formes de tensions dans l'apprentissage profond
 
@@ -232,7 +232,7 @@ batch_B = np.random.randn(4, 5, 2)
 batch_mm = np.einsum("bij,bjk->bik", batch_A, batch_B)
 ```
 
-Le coût calculé d'une contraction est le produit de toutes les tailles d'indices (contenues et sumées).`bij,bjk->bik`avec B=32, I=128, J=64, K=128: `32 * 128 * 64 * 128 = 33,554,432`les multiples ajoutés.
+Le coût calculé d'une contraction est le produit de toutes les tailles d'indices (contenues et sumées).`bij,bjk->bik`avec $B=32$- Je suis là .$I=128$- Je suis là .$J=64$- Je suis là .$K=128$Le numéro de la liste:$32 \cdot 128 \cdot 64 \cdot 128 = 33{,}554{,}432$les multiples ajoutés.
 
 ### Étape 7: Mécanisme d'attention par l'insum
 
