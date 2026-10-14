@@ -43,8 +43,8 @@
 
 写出输入的共同分布`x`标签`y`在两个方面:
 
-```text
-P(x, y) = P(x) * P(y | x) = P(y) * P(x | y)
+```math
+P(x, y) = P(x) \cdot P(y \mid x) = P(y) \cdot P(x \mid y)
 ```
 
 每种漂移都改变了不同的因素:
@@ -87,8 +87,8 @@ Gama等人呼吁改变`P(y | x)`它们叫做变化.`P(x)`这就离开了`P(y | x
 
 根据信用评分,PSI是指数值的.将参考值分为子,通常是指数分数分数的十个子,使每个子都占据了参考值的10%. 计算每个子中的当前值的份额. 然后每子加上一个术语:
 
-```text
-PSI = sum over bins of (current_share - reference_share) * ln(current_share / reference_share)
+```math
+\text{PSI} = \sum_{\text{bins}} (\text{current\_share} - \text{reference\_share}) \cdot \ln\left(\frac{\text{current\_share}}{\text{reference\_share}}\right)
 ```
 
 零的分数为记载无限,所以将每个分数切割到小值,例如0.0001.PSI是对称.它等于KL分离从流向参考加上KL分离从参考到参考.
@@ -99,8 +99,8 @@ PSI = sum over bins of (current_share - reference_share) * ln(current_share / re
 
 两样式KS统计数据`D`是两个经验累积分布函数之间的最大垂直差距:
 
-```text
-D = max over x of | F_reference(x) - F_current(x) |
+```math
+D = \max_x \left\lvert F_{\text{reference}}(x) - F_{\text{current}}(x) \right\rvert
 ```
 
 `D`对于相同样本为0和不重叠的样本为1.它不需要容器.p值来自实际样本大小的科尔摩戈尔夫分布.`n * m / (n + m)`现在,我们要去.
@@ -111,9 +111,11 @@ D = max over x of | F_reference(x) - F_current(x) |
 
 对于一个类别特征,例如支付道,构建一个表,每个类别有两个行 (引用,流动) 和一个列.每个单元中的预期数量来自列和列总数:
 
-```text
-expected[r][c] = row_total[r] * column_total[c] / grand_total
-chi2 = sum over cells of (observed - expected)^2 / expected
+```math
+\begin{aligned}
+\text{expected}[r][c] &= \text{row\_total}[r] \cdot \text{column\_total}[c] / \text{grand\_total} \\
+\text{chi2} &= \sum_{\text{cells}} (\text{observed} - \text{expected})^2 / \text{expected}
+\end{aligned}
 ```
 
 测试已经`k - 1`对于`k`类别.只在当前窗口中出现的类别添加了一个大术语,因此测试反应于新的值.Cramér的V是效果大小.对于一个两个行的表,它等于二平方根`chi2 / grand_total`现在,我们要去.
