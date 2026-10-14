@@ -173,8 +173,8 @@ RGB是捕获格式,但它并不总是模型中最有用的表示.
 
 根据RGB的灰度尺度是重量总数,而不是平均值,因为人类眼睛对绿色更敏感,而不是红色或蓝色:
 
-```
-Y = 0.299 R + 0.587 G + 0.114 B       (ITU-R BT.601, the classic weights)
+```math
+Y = 0.299 R + 0.587 G + 0.114 B \qquad \text{(ITU-R BT.601, the classic weights)}
 ```
 
 ### 面积比,重大小和插射

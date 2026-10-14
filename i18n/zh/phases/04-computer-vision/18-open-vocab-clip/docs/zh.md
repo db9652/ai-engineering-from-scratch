@@ -42,7 +42,7 @@ flowchart LR
 
 ### 目标
 
-给出一批N (图像,字幕) 双,构建一个NxN相似性矩阵.训练两个编码器,所以对角 (匹配的对) 有很高的相似性,外角 (非匹配) 有很少的相似性.
+考虑到一批$N$两对,建立一个$N \times N$训练两个编码器,使对角 (匹配对) 有高度的相似性,而离角 (非匹配) 有较低的相似性.
 
 ```
 sim_matrix = image_embeddings @ text_embeddings.T / tau
@@ -58,9 +58,11 @@ loss = (loss_i2t + loss_t2i) / 2
 
 利普 (Zhai等, 2023) 取代了软max 通过每对的利普:
 
-```
-loss = mean over pairs of log(1 + exp(-y_ij * sim_ij))
-y_ij = +1 if matching, -1 otherwise
+```math
+\begin{aligned}
+\text{loss} &= \operatorname*{mean}_{\text{pairs}} \log\left(1 + \exp(-y_{ij} \cdot \text{sim}_{ij})\right) \\
+y_{ij} &= \begin{cases} +1 & \text{if matching} \\ -1 & \text{otherwise} \end{cases}
+\end{aligned}
 ```
 
 对于每对的损失,Clip所要求的批量级正常化消除了.SigLIP在小批量尺寸上更好地训练,并且在相同数据上匹配或超过Clip.

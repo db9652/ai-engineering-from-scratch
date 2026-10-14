@@ -55,8 +55,8 @@ flowchart LR
 
 简体文本调节学习`epsilon_theta(x_t, t, c)`每次提醒`c` CFG 运营同一个网络`c`结果是: 由于声的发生在声中,声的发生在声中,声的发生在声中.
 
-```
-eps = eps_uncond + w * (eps_cond - eps_uncond)
+```math
+\epsilon = \epsilon_{\text{uncond}} + w \cdot (\epsilon_{\text{cond}} - \epsilon_{\text{uncond}})
 ```
 
 `w`率是指导的.`w=0`没有条件`w=1`完全有条件的.`w>1`通过 SD 默认方式, SD 输出将会变得更"即时"`w=7.5`现在,我们要去.

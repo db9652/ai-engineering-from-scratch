@@ -83,11 +83,13 @@ flowchart LR
 
 提升一个像素`(u, v)`的深度`d`转到一个3D点`(X, Y, Z)`在摄像头坐标中:
 
-```
-fx, fy, cx, cy = camera intrinsics
-X = (u - cx) * d / fx
-Y = (v - cy) * d / fy
-Z = d
+```math
+\begin{aligned}
+f_x, f_y, c_x, c_y &= \text{camera intrinsics} \\
+X &= (u - c_x) \cdot d / f_x \\
+Y &= (v - c_y) \cdot d / f_y \\
+Z &= d
+\end{aligned}
 ```
 
 内部数据来自EXIF元数据,校准模式或单元内核估计器 (Perspective Fields, UniDepth).没有内核数据,您仍然可以通过假设60-70° FOV和中度分辨率原则来呈现一个点云,可用于可视化而不是测量.
@@ -246,7 +248,7 @@ depth_np = np.array(out["depth"])
 | Monocular depth | "Single-image depth" | Depth estimation from one RGB frame, no stereo or LiDAR |
 | Relative depth | "Ordered depth" | Ordered z-values without real-world units |
 | Metric depth | "Absolute distance" | Depth in metres; requires calibration or a model trained with metric supervision |
-| AbsRel | "Absolute relative error" | Mean of |d_pred - d_gt| / d_gt; standard depth metric |
+| AbsRel | "Absolute relative error" | Mean of $\lvert d_{\text{pred}} - d_{\text{gt}} \rvert / d_{\text{gt}}$; standard depth metric |
 | Delta accuracy | "delta < 1.25" | Fraction of pixels with prediction within 25% of ground truth |
 | Pinhole camera | "fx, fy, cx, cy" | The camera model used to lift (u, v, d) to (X, Y, Z) |
 | DPT | "Dense Prediction Transformer" | The conv-based decoder used on top of frozen ViT encoders for depth |
