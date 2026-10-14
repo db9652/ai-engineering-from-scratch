@@ -42,11 +42,11 @@ INT8:  [1 sign] [7 value]                   = 8  bits (uniform steps)
 INT4:  [1 sign] [3 value]                   = 4  bits (16 levels total)
 ```
 
-**FP32**La précision est totale. 23 bits de mantissa donnent environ 7 chiffres décimaux de précision.
+**FP32**23 bits de mantissa vous donnent environ 7 chiffres décimaux de précision.$1.2 \times 10^{-38}$à $3.4 \times 10^{38}$- La formation a été utilisée exclusivement dans le PQ32.
 
 **FP16**Le nombre de bits de mantissa est de 3,3 chiffres décimaux. L'exponent se réduit à 5 bits, réduisant considérablement la plage (valeur maximale ~65,504).
 
-**BF16**(Brain Float 16) maintient l'exponent de 8 bits de FP32 mais réduit la mantissa à 7 bits. La même portée que FP32, moins précise que FP16. Google l'a conçu spécifiquement pour l'apprentissage profond. L'intuition: la portée est plus importante que la précision pour les réseaux neuronaux. Un gradient de 10^-20 qui se déplace en dessous de zéro dans le FP16 survit dans le BF16. Un poids de 0,07342 qui se déplace à 0,0734 dans BF16 est assez proche. Chaque course moderne utilise un mélange BF16 ou BF16/FP32.
+**BF16**(Brain Float 16) maintient l'exponent de 8 bits de FP32 mais réduit la mantissa à 7 bits. La même plage que FP32, moins précise que FP16. Google l'a conçu spécifiquement pour l'apprentissage en profondeur. L'intuition: la plage compte plus que la précision pour les réseaux neuronaux. Un gradient de$10^{-20}$Un poids de 0,07342 qui se déplace à 0,0734 dans le BF16 est assez proche.
 
 **FP8**Il est utilisé pour les poids et les activations pendant l'inférence. E5M2 (5 exponent, 2 mantissa) est utilisé pour les gradients pendant l'entraînement où la portée compte plus que la précision.
 
