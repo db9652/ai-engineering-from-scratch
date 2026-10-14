@@ -37,13 +37,13 @@ Exemplo: Transformador de 32 camadas dividido em 32 segmentos de 1 camada cada.
 - Memória: 32 entradas de camadas (pequenas) vs 32 * (volume de ativação por camada) (grande).
 - Computação extra: 1 unidade adicional para a frente por segmento, ou seja, ~ 33% mais FLOPs para a frente no total (uma vez que o retroceder é 2x para a frente, o passo completo torna-se 1 + 1 + 2 = 4 unidades em vez de 1 + 2 = 3).
 
-Esta é a receita original de Chen et al. 2016: um ponto de controlo por semana `sqrt(L)`Para L=64, é 8 pontos de verificação.
+Esta é a receita original de Chen et al. 2016: um ponto de controlo por semana `sqrt(L)`Elas são capazes de equilibrar memória e computação.$L=64$, que são 8 pontos de controlo.
 
 ### Controlos seletivos (Korthikanti 2022)
 
 Não todas as ativas custam o mesmo.`B*L*L*heads`A ativação oculta do FFN é `B*L*4d`Para sequências longas, o softmax domina.
 
-O checkpoint seletivo mantém as ativas baratas para armazenar (projeções lineares, resíduos) e recalcula apenas as caras (atenção).
+O ponto de controlo seletivo mantém as ativas de armazenamento baratas (projeções lineares, resíduos) e recalcula apenas as caras (atenção).$O(L^2)$Memória.
 
 Megatron-Core implementa isso como recomputada de ativação "seletiva".
 
@@ -293,8 +293,8 @@ Esta lição produz`outputs/prompt-activation-recompute-policy.md` um prompt que
 | Block checkpointing | "Coarse-grained" | Checkpoint whole transformer blocks; largest granularity |
 | FLOP overhead | "The compute tax" | Extra FLOPs per step = (recompute FLOPs) / (fwd + bwd FLOPs); 33% naive, 5% selective |
 | Activation offload | "Ship to CPU" | Move activations to CPU RAM across forward->backward; alternative to recompute |
-| sqrt-L rule | "The classical optimum" | For uniform-cost layers, optimal checkpoint spacing is sqrt(L) layers |
-| Attention-softmax volume | "The O(L^2) problem" | L^2 * heads * batch floats; dominates activation memory at long contexts |
+| sqrt-L rule | "The classical optimum" | For uniform-cost layers, optimal checkpoint spacing is $\sqrt{L}$ layers |
+| Attention-softmax volume | "The O(L^2) problem" | $L^2 \cdot \text{heads} \cdot \text{batch}$ floats; dominates activation memory at long contexts |
 
 ## Mais leitura
 

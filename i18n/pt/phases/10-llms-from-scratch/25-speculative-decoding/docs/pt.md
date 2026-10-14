@@ -53,8 +53,8 @@ onde`(p - q)+`Quando o projecto e o objectivo são de acordo (`p ≈ q`Quando os
 
 Se a taxa de aceitação a nível de tokens do modelo de projeto for `α`, os tokens esperados produzidos por passagem de destino é:
 
-```
-E[tokens] = (1 - α^{K+1}) / (1 - α)        # K = draft length, α in [0, 1]
+```math
+\mathbb{E}[\text{tokens}] = \frac{1 - \alpha^{K+1}}{1 - \alpha} \qquad K = \text{draft length}, \ \alpha \in [0, 1]
 ```
 
 - Não .`α = 0.8, K = 4`- Não .`(1 - 0.8^5)/(1 - 0.8) = 3.36`Os preços de um único destino a prazo são aproximadamente`cost_q * K + cost_p`(K passo-figura mais uma verificação de objectivo).`cost_p >> cost_q * K`O índice de aceleração é `3.36× / 1 = 3.36×`- O que é?
@@ -175,7 +175,7 @@ Esta lição produz`outputs/skill-speculative-tuning.md` uma habilidade que perf
 
 1. Implementar a regra exata de rejeição e verificá-la empiricamente.`speculative_decode`e através de amostragem de alvo simples; calcular a distância TV entre as duas distribuições de saída. Deve ser < 0,01.
 
-2. Calcule a fórmula de aceleração.`α`E ...`K`, gráfico de tokens esperados por meta-ahead. Encontre o K ideal para α ∈ {0,5, 0,7, 0,9}.
+2. Calcule a fórmula de aceleração.`α`E ...`K`, traçar os tokens esperados por meta-ahead.$K$Para$\alpha \in \lbrace 0.5, 0.7, 0.9 \rbrace$- Não .
 
 3. Treinar um pequeno rascunho, tomar um alvo de 124 milhões de GPT-2 e destilar um rascunho de 30 milhões de GPT-2 em tokens de 100 milhões com perda KL.`α`- O número de dados de texto não divulgados.
 
