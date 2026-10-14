@@ -43,8 +43,8 @@ O monitoramento de entrada é o principal tema desta lição, porque funciona an
 
 Escrever a distribuição conjunta de insumos `x`e rótulos `y`De duas formas:
 
-```text
-P(x, y) = P(x) * P(y | x) = P(y) * P(x | y)
+```math
+P(x, y) = P(x) \cdot P(y \mid x) = P(y) \cdot P(x \mid y)
 ```
 
 Cada tipo de deriva altera um fator diferente:
@@ -87,8 +87,8 @@ A estacionalidade quebra janelas ingênuos. O tráfego de segunda-feira difere d
 
 O PSI vem da pontuação de crédito. Corte os valores de referência em canas, geralmente dez canas nos deciles de referência, para que cada canha contenha 10% da referência. Conte a parcela dos valores correntes em cada canha.
 
-```text
-PSI = sum over bins of (current_share - reference_share) * ln(current_share / reference_share)
+```math
+\text{PSI} = \sum_{\text{bins}} (\text{current\_share} - \text{reference\_share}) \cdot \ln\left(\frac{\text{current\_share}}{\text{reference\_share}}\right)
 ```
 
 Um bin com uma parcela de zero faz o log infinito, então clipe cada parcela para um pequeno valor como 0.0001. PSI é simétrico.
@@ -99,8 +99,8 @@ Os praticantes lêem a PSI com bandas fixas: abaixo de 0,1 é estável, 0,1 a 0,
 
 A estatística de KS de duas amostras `D`é a maior diferença vertical entre as duas funções de distribuição cumulativa empírica:
 
-```text
-D = max over x of | F_reference(x) - F_current(x) |
+```math
+D = \max_x \left\lvert F_{\text{reference}}(x) - F_{\text{current}}(x) \right\rvert
 ```
 
 `D`O valor p é 0 para amostras idênticas e 1 para amostras que não se sobrepõem. Não precisa de contenedores. O valor p é derivado da distribuição de Kolmogorov com o tamanho da amostra efetivo `n * m / (n + m)`- Não .
@@ -111,9 +111,11 @@ Com amostras grandes, o valor p vai para zero para uma lacuna que ninguém se im
 
 Para uma característica categórica, como o canal de pagamento, criar uma tabela com duas linhas (referência, corrente) e uma coluna por categoria.
 
-```text
-expected[r][c] = row_total[r] * column_total[c] / grand_total
-chi2 = sum over cells of (observed - expected)^2 / expected
+```math
+\begin{aligned}
+\text{expected}[r][c] &= \text{row\_total}[r] \cdot \text{column\_total}[c] / \text{grand\_total} \\
+\text{chi2} &= \sum_{\text{cells}} (\text{observed} - \text{expected})^2 / \text{expected}
+\end{aligned}
 ```
 
 O teste tem`k - 1`Graus de liberdade para`k`categorias. Uma categoria que aparece apenas na janela atual adiciona um termo grande, de modo que o teste reage a novos valores. V de Cramér é o tamanho do efeito. Para uma tabela com duas fileiras, é igual à raiz quadrada de `chi2 / grand_total`- Não .
