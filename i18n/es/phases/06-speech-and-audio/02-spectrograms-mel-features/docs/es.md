@@ -23,7 +23,7 @@ Los espectrogramas mel empujan más lejos. Los humanos perciben el tono logaritm
 
 **Log-magnitude.**Las magnitudes primas abarcan entre 5 y 6 órdenes de magnitud.`log(|X| + 1e-6)`o `20 * log10(|X|)`Cada línea de producción utiliza la magnitud de registro, no la magnitud en bruto.
 
-**Mel scale.**Frecuencia `f`en mapas Hz a mel `m`por `m = 2595 * log10(1 + f / 700)`. El mapeo es aproximadamente lineal por debajo de 1 kHz y aproximadamente logaritmico por encima. 80 melbins que cubren 08 kHz es la entrada estándar de ASR.
+**Mel scale.**Frecuencia `f`en mapas Hz a mel `m`por $m = 2595 \cdot \log_{10}(1 + f / 700)$. El mapeo es aproximadamente lineal por debajo de 1 kHz y aproximadamente logaritmico por encima. 80 melbins que cubren 08 kHz es la entrada estándar de ASR.
 
 **Mel filterbank.**Un conjunto de filtros triangulares espaciados igualmente en la escala mel. Cada filtro es una suma ponderada de contenedores FFT adyacentes. Multiplicando la magnitud STFT por la matriz de filtro banco se da el espectrograma mel en un matmul.
 
