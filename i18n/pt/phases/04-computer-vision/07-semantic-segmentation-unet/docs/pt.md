@@ -87,10 +87,10 @@ Para uma primeira U-Net, bilinear é mais seguro.
 
 ### Entropia cruzada numa grade de pixels
 
-Para a segmentação semântica com classes C, a saída do modelo é `(N, C, H, W)`O alvo é o`(N, H, W)`A entropia cruzada é idêntica ao caso de classificação, apenas aplicada em cada posição espacial:
+Para segmentação semântica com $C$classes, o modelo de saída é `(N, C, H, W)`O alvo é o`(N, H, W)`A entropia cruzada é idêntica ao caso de classificação, apenas aplicada em cada posição espacial:
 
-```
-Loss = mean over (n, h, w) of -log( softmax(logits[n, :, h, w])[target[n, h, w]] )
+```math
+\text{Loss} = \operatorname*{mean}_{(n, h, w)} \left[ -\log\left( \operatorname{softmax}(\text{logits}[n, :, h, w])[\text{target}[n, h, w]] \right) \right]
 ```
 
 `F.cross_entropy`A PyTorch lida com esta forma de forma nativa.
@@ -101,17 +101,19 @@ A entropia cruzada trata todos os pixels de forma igual. Isso é errado quando u
 
 A perda de dados resolve isto, otimizando diretamente a sobreposição entre a mascara prevista e a verdadeira:
 
-```
-Dice(p, y) = 2 * sum(p * y) / (sum(p) + sum(y) + epsilon)
-Dice_loss = 1 - Dice
+```math
+\begin{aligned}
+\operatorname{Dice}(p, y) &= \frac{2 \sum (p \cdot y)}{\sum p + \sum y + \epsilon} \\
+\text{Dice}_{\text{loss}} &= 1 - \text{Dice}
+\end{aligned}
 ```
 
 onde`p`é o mapa de probabilidade sigmoide/softmax para uma classe e `y`A perda é zero apenas quando a sobreposição é perfeita. Porque é baseada em relação, desequilíbrio de classe é irrelevante.
 
 Na prática, use o **combined loss**- Não .
 
-```
-L = L_cross_entropy + lambda * L_dice       (lambda ~ 1)
+```math
+L = L_{\text{cross\_entropy}} + \lambda \cdot L_{\text{dice}} \qquad (\lambda \approx 1)
 ```
 
 A entropia cruzada dá gradientes estáveis no início do treinamento; o Dice concentra a cauda do treinamento na correspondência da forma da máscara. Esta combinação é o padrão de imagem médica e difícil de vencer em qualquer conjunto de dados desequilibrado de classe.
@@ -120,7 +122,7 @@ A entropia cruzada dá gradientes estáveis no início do treinamento; o Dice co
 
 - **Pixel accuracy**Preço baixo, quebrado em dados desequilibrados pela mesma razão que a precisão na classificação.
 - **IoU per class** intersecção sobre a união para a máscara de cada classe; média entre as classes = mIoU.
-- **Dice (F1 on pixels)** semelhante à UOI; `Dice = 2 * IoU / (1 + IoU)`A imagem médica prefere o Dice, a comunidade de condução prefere o IoU; eles estão monotonicamente relacionados.
+- **Dice (F1 on pixels)** semelhante à UOI; $\text{Dice} = 2 \cdot \text{IoU} / (1 + \text{IoU})$A imagem médica prefere o Dice, a comunidade de condução prefere o IoU; eles estão monotonicamente relacionados.
 - **Boundary F1** medidas de quão perto estão os limites previstos dos limites da verdade do solo, penalizando mesmo pequenas mudanças.
 
 A média da UO oculta uma classe a 15% quando outras nove são a 85%.

@@ -42,7 +42,7 @@ Ambos os codificadores terminam com uma projeção linear para a mesma dimensão
 
 ### O objectivo
 
-Dado um lote de pares N (imagem, legenda), construa uma matriz de semelhança NxN. Treine ambos os codificadores para que a diagonal (pares correspondentes) tenha alta semelhança e os fora-diagonais (não correspondentes) tenham baixa semelhança.
+Dado um lote de$N$(imagem, legenda) pares, construir um $N \times N$Matriz de semelhança. Treinar ambos os codificadores para que a diagonal (pares de correspondência) tenha alta semelhança e as fora-diagonais (não correspondentes) tenham baixa semelhança.
 
 ```
 sim_matrix = image_embeddings @ text_embeddings.T / tau
@@ -58,9 +58,11 @@ Simétrica porque tanto a recuperação de imagem a texto como de texto a imagem
 
 SigLIP (Zhai et al., 2023) substituiu o softmax por sigmoide por par:
 
-```
-loss = mean over pairs of log(1 + exp(-y_ij * sim_ij))
-y_ij = +1 if matching, -1 otherwise
+```math
+\begin{aligned}
+\text{loss} &= \operatorname*{mean}_{\text{pairs}} \log\left(1 + \exp(-y_{ij} \cdot \text{sim}_{ij})\right) \\
+y_{ij} &= \begin{cases} +1 & \text{if matching} \\ -1 & \text{otherwise} \end{cases}
+\end{aligned}
 ```
 
 A perda por par elimina a normalização de nível de lote que a CLIP requer.

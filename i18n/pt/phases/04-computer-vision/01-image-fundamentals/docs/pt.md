@@ -173,8 +173,8 @@ Para a maioria das redes modernas, alimentamos RGB.
 
 A escala de cinza da RGB é uma soma ponderada, não uma média, porque o olho humano é mais sensível ao verde do que ao vermelho ou ao azul:
 
-```
-Y = 0.299 R + 0.587 G + 0.114 B       (ITU-R BT.601, the classic weights)
+```math
+Y = 0.299 R + 0.587 G + 0.114 B \qquad \text{(ITU-R BT.601, the classic weights)}
 ```
 
 ### Relação de aspeto, redimensionamento e interpolação
