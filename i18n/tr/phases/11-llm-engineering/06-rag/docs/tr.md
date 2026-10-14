@@ -94,20 +94,20 @@ Bu ders için, TF-IDF kullanarak kendi basit gömülümüzi oluşturduk. TF-IDF 
 
 **Cosine similarity**Bu, iki vektör arasındaki açının kozinüsünü gösterir. -1 (karşıt) ile 1 (tıpkı aynı) arasında değişir. Büyüklüğü görmezden gelir, sadece yönü önemsiyor.
 
-```
-cosine_sim(a, b) = dot(a, b) / (||a|| * ||b||)
+```math
+\operatorname{cosine\_sim}(a, b) = \frac{\operatorname{dot}(a, b)}{\lVert a \rVert \cdot \lVert b \rVert}
 ```
 
 **Dot product**Büyük vektörler daha yüksek puanlar elde eder. Büyüklük bilgi taşıdığı zaman yararlıdır (uzak belgeler daha önemlidir).
 
-```
-dot(a, b) = sum(a_i * b_i)
+```math
+\operatorname{dot}(a, b) = \sum_i a_i b_i
 ```
 
 **L2 (Euclidean) distance**Vectör alanında düz çizgi mesafe. Daha küçük mesafe = daha benzer. Büyüklük farklarına duyarlı.
 
-```
-L2(a, b) = sqrt(sum((a_i - b_i)^2))
+```math
+\operatorname{L2}(a, b) = \sqrt{\sum_i (a_i - b_i)^2}
 ```
 
 Kosin benzerliği standarttır. Farklı uzunluklı belgeler ile zarifçe başa çıkar çünkü büyüklüğüyle normalleşir. Biri "vektor arayışı" dediğinde neredeyse her zaman kozine benzerliği kastediyorlar.
