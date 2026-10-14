@@ -43,11 +43,10 @@ w = [1, 0, -2]    -- a 3D vector
 
 ### المصفوفات: شبكات الأرقام
 
-المصفوفة هي شبكة ثنائية الأبعاد. الصفوف والعمدة. المصفوفة m x n لديها m الصفوف و n العمدة.
+المصفوفة هي شبكة ثنائية الأبعاد. الصفوف والعمود.$m \times n$المصفوفة لديها$m$الصفوف و$n$العمود
 
-```
-A = | 1  2  3 |     -- 2x3 matrix (2 rows, 3 columns)
-    | 4  5  6 |
+```math
+A = \begin{bmatrix} 1 & 2 & 3 \\ 4 & 5 & 6 \end{bmatrix} \quad \text{2x3 matrix (2 rows, 3 columns)}
 ```
 
 في الشبكات العصبية، تقوم المصفوفات الوزنية بتحويل متجهات المدخلات إلى متجهات الخروج. تستخدم طبقة ذات 784 مدخلًا و 128 خروجاً ماتريساً وزناً 128 × 784.
@@ -83,16 +82,14 @@ Inner dimensions: 784 = 784  -- valid
 
 في العنصر: ضرب المواقع المتطابقة يجب أن تكون كلا المصفوفتين ذات الشكل
 
-```
-| 1  2 |   | 5  6 |   | 5  12 |
-| 3  4 | * | 7  8 | = | 21 32 |
+```math
+\begin{bmatrix} 1 & 2 \\ 3 & 4 \end{bmatrix} * \begin{bmatrix} 5 & 6 \\ 7 & 8 \end{bmatrix} = \begin{bmatrix} 5 & 12 \\ 21 & 32 \end{bmatrix}
 ```
 
 مضاعفة المصفوفة: منتجات النقاط من الصفوف والعمود. يجب أن تتطابق الأبعاد الداخلية.
 
-```
-| 1  2 |   | 5  6 |   | 1*5+2*7  1*6+2*8 |   | 19  22 |
-| 3  4 | @ | 7  8 | = | 3*5+4*7  3*6+4*8 | = | 43  50 |
+```math
+\begin{bmatrix} 1 & 2 \\ 3 & 4 \end{bmatrix} @ \begin{bmatrix} 5 & 6 \\ 7 & 8 \end{bmatrix} = \begin{bmatrix} 1 \cdot 5 + 2 \cdot 7 & 1 \cdot 6 + 2 \cdot 8 \\ 3 \cdot 5 + 4 \cdot 7 & 3 \cdot 6 + 4 \cdot 8 \end{bmatrix} = \begin{bmatrix} 19 & 22 \\ 43 & 50 \end{bmatrix}
 ```
 
 عمليات مختلفة، نتائج مختلفة، قواعد مختلفة.
@@ -332,7 +329,7 @@ print(matrix + bias)
 | Vector | "An arrow" | An ordered list of numbers. In AI: a point in high-dimensional space. |
 | Matrix | "A table of numbers" | A linear transformation. It maps vectors from one space to another. |
 | Matrix multiply | "Just multiply the numbers" | Dot products between every row of the first matrix and every column of the second. Order matters. |
-| Transpose | "Flip it" | Swap rows and columns. Turns an m x n matrix into n x m. Critical in backpropagation. |
+| Transpose | "Flip it" | Swap rows and columns. Turns an $m \times n$ matrix into $n \times m$. Critical in backpropagation. |
 | Determinant | "Some number from the matrix" | Measures how much the matrix scales area (2D) or volume (3D). Zero means the transformation crushes a dimension. |
 | Inverse | "Undo the matrix" | The matrix that reverses the transformation. Only exists when the determinant is not zero. |
 | Identity matrix | "The boring matrix" | The matrix equivalent of multiplying by 1. Used in residual connections (ResNets). |
