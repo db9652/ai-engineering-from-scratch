@@ -83,11 +83,13 @@ flowchart LR
 
 لرفع بيكسل `(u, v)`مع عمق`d`إلى نقطة ثلاثية الأبعاد`(X, Y, Z)`في إحداثيات الكاميرا:
 
-```
-fx, fy, cx, cy = camera intrinsics
-X = (u - cx) * d / fx
-Y = (v - cy) * d / fy
-Z = d
+```math
+\begin{aligned}
+f_x, f_y, c_x, c_y &= \text{camera intrinsics} \\
+X &= (u - c_x) \cdot d / f_x \\
+Y &= (v - c_y) \cdot d / f_y \\
+Z &= d
+\end{aligned}
 ```
 
 تأتي البيانات الداخلية من بيانات EXIF ، نمط تحديد المعدل ، أو مقياس داخلي واحد (حقول المنظور ، UniDepth). بدون البيانات الداخلية ، يمكنك لا يزال تقديم سحابة نقطة عن طريق افتراض مبدأ FOV 60-70 درجة ومراد القرار المتوسط  يمكن استخدامها للتصور ، وليس للقياس.
@@ -246,7 +248,7 @@ depth_np = np.array(out["depth"])
 | Monocular depth | "Single-image depth" | Depth estimation from one RGB frame, no stereo or LiDAR |
 | Relative depth | "Ordered depth" | Ordered z-values without real-world units |
 | Metric depth | "Absolute distance" | Depth in metres; requires calibration or a model trained with metric supervision |
-| AbsRel | "Absolute relative error" | Mean of |d_pred - d_gt| / d_gt; standard depth metric |
+| AbsRel | "Absolute relative error" | Mean of $\lvert d_{\text{pred}} - d_{\text{gt}} \rvert / d_{\text{gt}}$; standard depth metric |
 | Delta accuracy | "delta < 1.25" | Fraction of pixels with prediction within 25% of ground truth |
 | Pinhole camera | "fx, fy, cx, cy" | The camera model used to lift (u, v, d) to (X, Y, Z) |
 | DPT | "Dense Prediction Transformer" | The conv-based decoder used on top of frozen ViT encoders for depth |
