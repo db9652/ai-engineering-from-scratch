@@ -36,7 +36,7 @@ graph LR
     T3 --> T4["4D Tensor<br/>rank 4<br/>shape: (B,C,H,W)"]
 ```
 
-El total de elementos = producto de todos los tamaños.`(2, 3, 4)`Tiene`2 * 3 * 4 = 24`elementos.
+El total de elementos = producto de todos los tamaños.`(2, 3, 4)`Tiene$2 \cdot 3 \cdot 4 = 24$elementos.
 
 ### Las formas de tensor en el aprendizaje profundo
 
@@ -232,7 +232,7 @@ batch_B = np.random.randn(4, 5, 2)
 batch_mm = np.einsum("bij,bjk->bik", batch_A, batch_B)
 ```
 
-El coste computacional de una contracción es el producto de todos los tamaños de índices (contidos y sumados).`bij,bjk->bik`con B=32, I=128, J=64, K=128: `32 * 128 * 64 * 128 = 33,554,432`el número de veces adicionales.
+El coste computacional de una contracción es el producto de todos los tamaños de índices (contidos y sumados).`bij,bjk->bik`con$B=32$¿ Qué ?$I=128$¿ Qué ?$J=64$¿ Qué ?$K=128$¿ Qué es esto ?$32 \cdot 128 \cdot 64 \cdot 128 = 33{,}554{,}432$el número de veces adicionales.
 
 ### Paso 7: Mecanismo de atención a través del einsum
 
