@@ -23,7 +23,7 @@ Các quang phổ mel đẩy xa hơn. Con người nhận thức âm thanh theo c
 
 **Log-magnitude.**Tầm độ lớn có thể dao động từ 5-6 bậc.`log(|X| + 1e-6)`hoặc `20 * log10(|X|)`Mỗi đường ống sản xuất sử dụng log magnitude, không phải là nguyên liệu.
 
-**Mel scale.**Tần suất `f`trong bản đồ Hz đến mel `m`bởi `m = 2595 * log10(1 + f / 700)`. Bản đồ là đường thẳng dưới 1 kHz và logarithmic trên. 80 mel bins bao gồm 08 kHz là đầu vào ASR tiêu chuẩn.
+**Mel scale.**Tần suất `f`trong bản đồ Hz đến mel `m`bởi $m = 2595 \cdot \log_{10}(1 + f / 700)$. Bản đồ là đường thẳng dưới 1 kHz và logarithmic trên. 80 mel bins bao gồm 08 kHz là đầu vào ASR tiêu chuẩn.
 
 **Mel filterbank.**Một bộ bộ bộ lọc tam giác nằm trong khoảng cách bằng nhau trên thang mel. Mỗi bộ lọc là tổng cân của các thùng FFT lân cận.
 
