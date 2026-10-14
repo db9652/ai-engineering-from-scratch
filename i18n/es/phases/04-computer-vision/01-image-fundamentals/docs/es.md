@@ -173,8 +173,8 @@ Para la mayoría de las cadenas de televisión modernas se alimenta RGB.
 
 La escala de gris de RGB es una suma ponderada, no una media, porque el ojo humano es más sensible al verde que al rojo o al azul:
 
-```
-Y = 0.299 R + 0.587 G + 0.114 B       (ITU-R BT.601, the classic weights)
+```math
+Y = 0.299 R + 0.587 G + 0.114 B \qquad \text{(ITU-R BT.601, the classic weights)}
 ```
 
 ### Ratio de aspecto, redimensionamiento e interpolación

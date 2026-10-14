@@ -83,11 +83,13 @@ Marigold (Ke et al., CVPR 2024) reformula la estimación de profundidad como dif
 
 Para levantar un píxel `(u, v)`con profundidad `d`a un punto 3D `(X, Y, Z)`en las coordenadas de la cámara:
 
-```
-fx, fy, cx, cy = camera intrinsics
-X = (u - cx) * d / fx
-Y = (v - cy) * d / fy
-Z = d
+```math
+\begin{aligned}
+f_x, f_y, c_x, c_y &= \text{camera intrinsics} \\
+X &= (u - c_x) \cdot d / f_x \\
+Y &= (v - c_y) \cdot d / f_y \\
+Z &= d
+\end{aligned}
 ```
 
 Los datos intrínsecos provienen de metadatos EXIF, un patrón de calibración o un estimador intrínseco monocular (Perspective Fields, UniDepth). Sin intrínsecos, todavía se puede renderizar una nube de puntos asumiendo un principio de 60 a 70 ° FOV y resolución moderada  utilizable para la visualización, no para la medición.
@@ -246,7 +248,7 @@ Esta lección produce:
 | Monocular depth | "Single-image depth" | Depth estimation from one RGB frame, no stereo or LiDAR |
 | Relative depth | "Ordered depth" | Ordered z-values without real-world units |
 | Metric depth | "Absolute distance" | Depth in metres; requires calibration or a model trained with metric supervision |
-| AbsRel | "Absolute relative error" | Mean of |d_pred - d_gt| / d_gt; standard depth metric |
+| AbsRel | "Absolute relative error" | Mean of $\lvert d_{\text{pred}} - d_{\text{gt}} \rvert / d_{\text{gt}}$; standard depth metric |
 | Delta accuracy | "delta < 1.25" | Fraction of pixels with prediction within 25% of ground truth |
 | Pinhole camera | "fx, fy, cx, cy" | The camera model used to lift (u, v, d) to (X, Y, Z) |
 | DPT | "Dense Prediction Transformer" | The conv-based decoder used on top of frozen ViT encoders for depth |

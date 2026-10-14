@@ -42,7 +42,7 @@ Ambos codificadores terminan con una proyección lineal a la misma dimensión de
 
 ### El objetivo
 
-Dado un lote de pares N (imagen, leyenda) construye una matriz de similitud NxN. Entrenar ambos codificadores para que la diagonal (pares coincidentes) tenga una alta similitud y los fuera de diagonales (no coincidentes) tengan una baja similitud.
+Dado un lote de $N$(imagen, captcha) parejas, construir un $N \times N$Matriz de similitud. Entrenar ambos codificadores para que la diagonal (pares coincidentes) tenga una alta similitud y las fuera de diagonales (no coincidentes) tengan una baja similitud.
 
 ```
 sim_matrix = image_embeddings @ text_embeddings.T / tau
@@ -58,9 +58,11 @@ Simétrico porque tanto la extracción de imagen a texto como de texto a imagen 
 
 SigLIP (Zhai et al., 2023) sustituyó la softmax por sigmoide por pareja:
 
-```
-loss = mean over pairs of log(1 + exp(-y_ij * sim_ij))
-y_ij = +1 if matching, -1 otherwise
+```math
+\begin{aligned}
+\text{loss} &= \operatorname*{mean}_{\text{pairs}} \log\left(1 + \exp(-y_{ij} \cdot \text{sim}_{ij})\right) \\
+y_{ij} &= \begin{cases} +1 & \text{if matching} \\ -1 & \text{otherwise} \end{cases}
+\end{aligned}
 ```
 
 La pérdida por pareja elimina la normalización a nivel de lote que requiere CLIP. SigLIP se entraña mejor en pequeños lotes y coincide o supera CLIP en datos iguales.

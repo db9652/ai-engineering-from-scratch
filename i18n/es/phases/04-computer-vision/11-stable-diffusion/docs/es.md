@@ -55,8 +55,8 @@ flowchart LR
 
 Aprende el condicionamiento del texto en blanco `epsilon_theta(x_t, t, c)`por cada pedido .`c`. CFG entrena la misma red con `c`El estudio de la investigación de la CPI ha reducido el 10% de las veces (reemplazado por una incorporación vacía), dando un modelo único que predice tanto el ruido condicional como el no.
 
-```
-eps = eps_uncond + w * (eps_cond - eps_uncond)
+```math
+\epsilon = \epsilon_{\text{uncond}} + w \cdot (\epsilon_{\text{cond}} - \epsilon_{\text{uncond}})
 ```
 
 `w`es la escala de orientación. `w=0`es incondicional,`w=1`es simplemente condicional,`w>1`El sistema de distribución de datos de SD es el sistema de distribución de datos de SD.`w=7.5`¿ Qué ?
